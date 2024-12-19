@@ -16,7 +16,7 @@ namespace Entities
 		[Display(Name = "Şifre"), StringLength(150)]
 		public string Password { get; set; }
 		[Display(Name = "Telefon"), StringLength(15)]
-		public string Phone { get; set; }
+		public string? Phone { get; set; }
 		[Display(Name = "Durum")]
 		public bool	IsActive { get; set; }
 		[Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]

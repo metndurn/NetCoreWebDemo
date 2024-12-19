@@ -1,7 +1,14 @@
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NetCoreWebDemo.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer());
 
 var app = builder.Build();
 
