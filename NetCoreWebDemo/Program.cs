@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer());
+builder.Services.AddDbContext<DatabaseContext>
+	(options => options.UseSqlServer
+	(builder.Configuration.GetConnectionString(@" Server=.; Database=NetCoreWebDemo; Trusted_Connection=True; TrustServerCertificate=True;")));
 
 var app = builder.Build();
 

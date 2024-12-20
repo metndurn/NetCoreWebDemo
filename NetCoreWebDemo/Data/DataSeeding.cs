@@ -18,6 +18,15 @@ namespace NetCoreWebDemo.Data
 				{
 					User user = new User()
 					{
+						//Id = 1,
+						//Name = "Admin",
+						//SurName = "1234567890",
+						//Password = "12345",
+						//UserName = "Admin",
+						//Email = "admin@NetCoreWebDemo.net",
+						//Phone = "1234567890",
+						//IsActive = true,
+						//CreateDate = DateTime.Now
 						Name = "Admin",
 						Password = "12345",
 						UserName = "Admin",
