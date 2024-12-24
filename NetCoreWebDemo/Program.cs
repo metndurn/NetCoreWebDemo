@@ -8,9 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<DatabaseContext>
-	(options => options.UseSqlServer
-	(builder.Configuration.GetConnectionString(@" Server=.; Database=NetCoreWebDemo; Trusted_Connection=True; TrustServerCertificate=True;")));
+//chgbt ye gore bu kod yazýldý ama kullandýgým zamanda cozum olmadý sýmdýlýk burada kalacak
+/*builder.Configuration.GetConnectionString("DefaultConnection")*/
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer());
 
 var app = builder.Build();
 
