@@ -12,6 +12,6 @@ namespace Entities
         [Display(Name = "Kategori Açıklaması"),DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "Kategori Resmi")]
-        public string Image { get; set; }
+        public string? Image { get; set; }
     }
 }

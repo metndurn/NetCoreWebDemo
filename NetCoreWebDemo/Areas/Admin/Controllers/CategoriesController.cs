@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using NetCoreWebDemo.Data;
+using NetCoreWebDemo.Utils;
 
 namespace NetCoreWebDemo.Areas.Admin.Controllers
 {
@@ -54,10 +55,11 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(Category category, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
+                category.Image = FileHelper.FileLoader(Image);
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,13 +82,9 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             }
             return View(category);
         }
-
-        // POST: Admin/Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ParentId,Name,Description,Image")] Category category)
+        public async Task<IActionResult> Edit(int id, Category category, IFormFile Image)
         {
             if (id != category.Id)
             {
@@ -97,6 +95,10 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (Image != null)
+                    {
+						category.Image = FileHelper.FileLoader(Image);
+					}
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
