@@ -80,7 +80,8 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(category);
+			ViewData["ParentId"] = new SelectList(_context.Categories, "Id", "Name");
+			return View(category);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
