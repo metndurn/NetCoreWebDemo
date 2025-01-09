@@ -26,6 +26,13 @@
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" class="form-control" type="file"/>
                 <span asp-validation-for="Image" class="text-danger"></span>
+                @{/*guncelle kısmındakı goruntulenen resmın sılme kısmını gosterdık*/
+                    if (Model.Image != null)
+                    {
+                        <img src="/Img/@Model.Image" alt="" height="100" /> @*guncelleme kısmında hangi resim secildiyse o resim gorunur*@
+                        <div>@Html.CheckBox("cbResimSil") Resmi Sil </div>
+                    }
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Kaydet" class="btn btn-primary" />

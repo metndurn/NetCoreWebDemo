@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using NetCoreWebDemo.Data;
+using NetCoreWebDemo.Utils;
 
 namespace NetCoreWebDemo.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+	[Area("Admin")]
     public class NewsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -49,17 +45,14 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
         {
             return View();
         }
-
-        // POST: Admin/News/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Content,Image")] News news)
+        public async Task<IActionResult> Create(News news, IFormFile Image)/*resimler icin Iformfile image eklendi*/
         {
             if (ModelState.IsValid)
             {
-                _context.Add(news);
+				news.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+				_context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -81,14 +74,10 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             }
             return View(news);
         }
-
-        // POST: Admin/News/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Content,Image")] News news)
-        {
+        public async Task<IActionResult> Edit(int id, News news, IFormFile Image, bool cbResimSil)/*resimler icin Iformfile image eklendi*/
+		{
             if (id != news.Id)
             {
                 return NotFound();
@@ -98,6 +87,10 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (Image != null)//if yapısı eklendi
+                    {
+						news.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+					}
                     _context.Update(news);
                     await _context.SaveChangesAsync();
                 }

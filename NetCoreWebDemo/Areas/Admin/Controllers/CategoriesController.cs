@@ -55,12 +55,12 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category category, IFormFile Image)
-        {
+        public async Task<IActionResult> Create(Category category, IFormFile Image)/*resimler icin Iformfile image eklendi*/
+		{
             if (ModelState.IsValid)
             {
-                category.Image = FileHelper.FileLoader(Image);
-                _context.Add(category);
+                category.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+				_context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -85,8 +85,8 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Category category, IFormFile Image)
-        {
+        public async Task<IActionResult> Edit(int id, Category category, IFormFile Image)/*resimler icin Iformfile image eklendi*/
+		{
             if (id != category.Id)
             {
                 return NotFound();
@@ -96,9 +96,9 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (Image != null)
+                    if (Image != null)//if yapısı eklendı
                     {
-						category.Image = FileHelper.FileLoader(Image);
+						category.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
 					}
                     _context.Update(category);
                     await _context.SaveChangesAsync();

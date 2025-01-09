@@ -40,7 +40,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                    <img src="/Img/@Html.DisplayFor(modelItem => item.Image)" alt="" height="50" />
+                @* @Html.DisplayFor(modelItem => item.Image) *@
+                @*resimlerin gözukmesi icin bu kod burada gereklidir*@
+                <img src="/Img/@Html.DisplayFor(modelItem => item.Image)" alt="" height="50" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Güncelle</a>
