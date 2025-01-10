@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using NetCoreWebDemo.Data;
+using NetCoreWebDemo.Utils;
 
 namespace NetCoreWebDemo.Areas.Admin.Controllers
 {
@@ -53,16 +54,14 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Posts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Content,Image,CategoryId")] Post post)
+        public async Task<IActionResult> Create(Post post, IFormFile Image)
         {
             if (ModelState.IsValid)
-            {
-                _context.Add(post);
+			{
+				post.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+				_context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -87,14 +86,12 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             return View(post);
         }
 
-        // POST: Admin/Posts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Content,Image,CategoryId")] Post post)
-        {
-            if (id != post.Id)
+		public async Task<IActionResult> Edit(int id, Post post, IFormFile? Image, bool cbResimSil)/*resimler icin Iformfile image eklendi*/
+		{/*bool ile verilen metod secilirse kullanılacak*/
+			/*unutma bazı yerlerdeki hatalar ? bu soru işaretine bağlidir yani gerekirse kullanın boş geçilmiş olsun*/
+			if (id != post.Id)
             {
                 return NotFound();
             }
@@ -103,7 +100,16 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(post);
+					if (cbResimSil)
+					{
+						post.Image = string.Empty;/*proporty temizleyecek ici bos olacak*/
+						FileHelper.FileTerminator(post.Image);/*sunucudan resim silmek icin olacak*/
+					}
+					if (Image != null)//if yapısı eklendi
+					{
+						post.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+					}
+					_context.Update(post);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

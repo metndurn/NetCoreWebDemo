@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using NetCoreWebDemo.Data;
+using NetCoreWebDemo.Utils;
 
 namespace NetCoreWebDemo.Areas.Admin.Controllers
 {
@@ -50,16 +51,14 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Sliders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Link,Image")] Slider slider)
-        {
+        public async Task<IActionResult> Create(Slider slider, IFormFile Image)/*resimler icin Iformfile image eklendi*/
+		{
             if (ModelState.IsValid)
             {
-                _context.Add(slider);
+				slider.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+				_context.Add(slider);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -82,14 +81,12 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             return View(slider);
         }
 
-        // POST: Admin/Sliders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Link,Image")] Slider slider)
-        {
-            if (id != slider.Id)
+        public async Task<IActionResult> Edit(int id, Slider slider, IFormFile? Image,bool cbResimSil)/*resimler icin Iformfile image eklendi*/
+		{/*bool ile verilen metod secilirse kullanılacak*/
+			/*unutma bazı yerlerdeki hatalar ? bu soru işaretine bağlidir yani gerekirse kullanın boş geçilmiş olsun*/
+			if (id != slider.Id)
             {
                 return NotFound();
             }
@@ -98,7 +95,16 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(slider);
+					if (cbResimSil)
+					{
+						slider.Image = string.Empty;/*proporty temizleyecek ici bos olacak*/
+						FileHelper.FileTerminator(slider.Image);/*sunucudan resim silmek icin olacak*/
+					}
+					if (Image != null)//if yapısı eklendi
+					{
+						slider.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
+					}
+					_context.Update(slider);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

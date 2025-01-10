@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreWebDemo", "NetCoreWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{B0CDE865-8A54-4007-B4B7-3E81A41A95F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "Dal\DAL.csproj", "{8D368F1A-40CB-42C2-A91E-9A78D2FC0468}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{8DC74522-0E32-4082-A315-080C7BFC8DEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B0CDE865-8A54-4007-B4B7-3E81A41A95F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0CDE865-8A54-4007-B4B7-3E81A41A95F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0CDE865-8A54-4007-B4B7-3E81A41A95F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D368F1A-40CB-42C2-A91E-9A78D2FC0468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D368F1A-40CB-42C2-A91E-9A78D2FC0468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D368F1A-40CB-42C2-A91E-9A78D2FC0468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D368F1A-40CB-42C2-A91E-9A78D2FC0468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC74522-0E32-4082-A315-080C7BFC8DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC74522-0E32-4082-A315-080C7BFC8DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC74522-0E32-4082-A315-080C7BFC8DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC74522-0E32-4082-A315-080C7BFC8DEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

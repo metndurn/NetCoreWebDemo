@@ -10,7 +10,8 @@ builder.Services.AddControllersWithViews();
 
 //chgbt ye gore bu kod yazýldý ama kullandýgým zamanda cozum olmadý sýmdýlýk burada kalacak
 /*builder.Configuration.GetConnectionString("DefaultConnection")*/
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer());
+builder.Services.AddDbContext<DatabaseContext>();//admin tarafý ýcýn kullanýlýyor sistem hata verirse bunu geri koy options => options.UseSqlServer()
+builder.Services.AddDbContext<DatabaseContext>();//Dal katmaný icin context olustu
 
 var app = builder.Build();
 

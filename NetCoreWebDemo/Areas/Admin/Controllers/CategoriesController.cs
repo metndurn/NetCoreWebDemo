@@ -85,8 +85,8 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Category category, IFormFile Image)/*resimler icin Iformfile image eklendi*/
-		{
+        public async Task<IActionResult> Edit(int id, Category category, IFormFile? Image, bool cbResimSil)/*resimler icin Iformfile image eklendi*/
+		{/*bool ile verilen metod secilirse kullanılacak*/
             if (id != category.Id)
             {
                 return NotFound();
@@ -96,11 +96,17 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (Image != null)//if yapısı eklendı
+					if (cbResimSil)
+					{
+						category.Image = string.Empty;/*proporty temizleyecek ici bos olacak*/
+						FileHelper.FileTerminator(category.Image);/*sunucudan resim silmek icin olacak*/
+					}
+					if (Image != null)//if yapısı eklendı
                     {
 						category.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
 					}
-                    _context.Update(category);
+					
+					_context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -76,9 +76,10 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, News news, IFormFile Image, bool cbResimSil)/*resimler icin Iformfile image eklendi*/
-		{
-            if (id != news.Id)
+        public async Task<IActionResult> Edit(int id, News news, IFormFile? Image, bool cbResimSil)/*resimler icin Iformfile image eklendi*/
+		{/*bool ile verilen metod secilirse kullanılacak*/
+			/*unutma bazı yerlerdeki hatalar ? bu soru işaretine bağlidir yani gerekirse kullanın boş geçilmiş olsun*/
+			if (id != news.Id)
             {
                 return NotFound();
             }
@@ -87,10 +88,16 @@ namespace NetCoreWebDemo.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (Image != null)//if yapısı eklendi
+					if (cbResimSil)
+					{
+						news.Image = string.Empty;/*proporty temizleyecek ici bos olacak*/
+						FileHelper.FileTerminator(news.Image);/*sunucudan resim silmek icin olacak*/
+					}
+					if (Image != null)//if yapısı eklendi
                     {
 						news.Image = FileHelper.FileLoader(Image);/*resimler icin Iformfile image eklendi*/
 					}
+                   
                     _context.Update(news);
                     await _context.SaveChangesAsync();
                 }

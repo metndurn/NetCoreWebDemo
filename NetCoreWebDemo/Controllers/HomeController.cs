@@ -15,6 +15,10 @@ namespace NetCoreWebDemo.Controllers
 
 		public IActionResult Index()
 		{
+			var model = new HomePageViewModel()
+			{
+
+			};
 			return View();
 		}
 
