@@ -44,7 +44,7 @@ namespace BL
 			return _objectSet.FirstOrDefault(expression);
 		}
 
-		public List<T> GetAll()//geri listeleri dondurur
+		public List<T> GetAll(int id)//geri listeleri dondurur
 		{
 			return _objectSet.ToList();
 		}
@@ -52,6 +52,11 @@ namespace BL
 		public List<T> GetAll(Expression<Func<T, bool>> expression)//expression ile filtreleme yapılabilinir
 		{
 			return _objectSet.Where(expression).ToList();
+		}
+
+		public List<T> GetAll()
+		{
+			throw new NotImplementedException();
 		}
 
 		public Task<IEnumerable<T>> GetAllByAsync()
