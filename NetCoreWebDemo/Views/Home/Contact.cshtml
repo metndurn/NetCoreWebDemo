@@ -1,0 +1,91 @@
+﻿@model Entities.Contact
+
+@{
+    ViewData["Title"] = "İletişim";
+}
+
+<h1>İletişim</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Contact" id="iletisim_formu">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Gönder" class="btn btn-primary" />
+                <input id="Button1" type="button" value="Gönder" onclick="iletisim_formu()" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <p>Adres : İstanbul / Türkiye</p>
+        <p>Telefon : 0212 999 99 99</p>
+        <p>Email : info@netcoreapp.com</p>
+    </div>
+</div>
+
+@{
+    if (TempData["Mesaj"] != null)
+    {
+       <div class="alert alert-info">
+            @TempData["Mesaj"]
+       </div>
+    }
+}
+
+<div id="sonuc" class="alert alert-info" style="display:none"></div>@*islem basarılı olursa bu calısır*@
+
+@*asagıda ajax kodu yazıldı*@
+@section Scripts{
+    <script>
+        function iletisim_formu() {
+            var namesurname = $("#Name").val();
+            var email = $("#Email").val();
+            var phone = $("#Phone").val();
+            var mesaj = $("#Message").val();
+
+            var message = {
+                "Name" : namesurname,
+                "Email" : email,
+                "Phone" : phone,
+                "Message" : mesaj
+            };
+
+            $.ajax({
+                method: "POST",
+                url: "/Home/Contact",
+                type: "json",
+                data: message,
+                success: function (data) {
+                    document.getElementById("iletisim_formu").reset();
+                    $("#sonuc").show().html("Mesajınız Başarıyla Gönderilmiştir!").delay("5000").fadeOut();
+                },
+                error: function (err) {
+                  $("#sonuc").show().removeClass("alert-info").addClass("alert-danger")
+                  .html("Hata Oluştu! Mesajınız Gönderilmedi!").delay("10000").fadeOut();
+                }
+            });
+        }
+    </script>
+}
+

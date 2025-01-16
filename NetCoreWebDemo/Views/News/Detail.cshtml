@@ -1,20 +1,21 @@
 ﻿@model Entities.News
 
 @{
-    ViewData["Title"] = Model.Name + " Haber Detayı";
+    ViewData["Title"] = Model.Name + "Haber Detayı";
 }
+
+
 <div class="container">
     <h1>@Model.Name</h1>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <img src="/Img/@Model.Image" alt="" class="bd-placeholder-img rounded-circle" width="300" height="300" />
+            <img src="/Img/@Model.Image" alt="" class="bd-placeholder-img rounded-circle" width="140" height="140" />
+
         </div>
         <div class="col-md-8">
             <p>@Model.Content</p>
         </div>
     </div>
-</div>
-<div>
-     <a asp-action="Index" class="btn btn-outline-primary">Listeye Dön</a>
+    
 </div>

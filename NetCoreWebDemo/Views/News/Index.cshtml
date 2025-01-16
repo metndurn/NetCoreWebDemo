@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<Entities.News>
 @{
-    ViewData["Title"] = "Bizden Haberler";
+    ViewData["Title"] = "Index";
 }
+
+<h1>Bizden Haberler</h1>
 
 <div class="container">
     <h2 class="text-center">Bizden Haberler</h2>
-    <hr class="featurette-divider">
-    <!-- Three columns of text below the carousel -->
+    @*<hr class="featurette-divider"> *@
     <div class="row text-center">
         @foreach (var item in Model)
         {
             <div class="col-lg-4">
                 <img src="/Img/@item.Image" alt="" class="bd-placeholder-img rounded-circle" width="140" height="140" />
-                <h2 class="fw-normal">@item.Name</h2>
+                <h2>@item.Name</h2>
                 <p>@item.Content</p>
                 <p><a class="btn btn-secondary" href="/News/Detail/@item.Id">Detayını Gör»</a></p>
             </div>

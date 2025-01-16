@@ -1,13 +1,8 @@
 ﻿using DAL;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 /*KATMANLI MIMARI KULLANARAK BIRBIRLERINE REFERANS ETTIK VE SART KOSARAK NEW YAPMASINA OLANAK SAGLADIK*/
 namespace BL
 {
@@ -44,7 +39,7 @@ namespace BL
 			return _objectSet.FirstOrDefault(expression);
 		}
 
-		public List<T> GetAll(int id)//geri listeleri dondurur
+		public List<T> GetAll()//geri listeleri dondurur
 		{
 			return _objectSet.ToList();
 		}
@@ -54,10 +49,10 @@ namespace BL
 			return _objectSet.Where(expression).ToList();
 		}
 
-		public List<T> GetAll()
-		{
-			throw new NotImplementedException();
-		}
+		//public List<T> GetAll()
+		//{
+		//	throw new NotImplementedException();
+		//}
 
 		public Task<IEnumerable<T>> GetAllByAsync()
 		{

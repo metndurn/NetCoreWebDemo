@@ -61,12 +61,13 @@
     {
         <div class="row featurette">
             <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">@item.Name</h2>
+                <h2 class="featurette-heading">@item.Name</h2>
                 <p class="lead">@item.Content</p>
             </div>
             <div class="col-md-5">
-                <a href="/Post/Detail/@item.Id">
-                    <img src="/Img/@item.Image" alt="@item.Name" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400" height="400" />
+                <a href="/Posts/Detail/@item.Id">
+                    <img src="/Img/@item.Image" alt="@item.Name" 
+                    class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400" height="400" />
                 </a>
             </div>
         </div>

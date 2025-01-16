@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NetCoreWebDemo.Controllers
 {
-	public class PostsController : Controller/*burada hata var bulamadım*/
+	public class PostsController : Controller
 	{
 		PostManager postManager = new PostManager();
 		public IActionResult Index()

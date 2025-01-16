@@ -5,7 +5,7 @@ namespace NetCoreWebDemo.Controllers
 {
 	public class NewsController : Controller
 	{
-		NewsManager newsManager = new NewsManager();/*burada hata var bulamadım*/
+		NewsManager newsManager = new NewsManager();
 		public IActionResult Index()
 		{
 			return View(newsManager.GetAll());
