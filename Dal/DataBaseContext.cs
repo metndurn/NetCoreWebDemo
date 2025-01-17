@@ -24,7 +24,8 @@ namespace DAL
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			//base.OnConfiguring(optionsBuilder); /*MultipleActiveResultSets=true*/ 
-			optionsBuilder.UseSqlServer(@" Server=.; Database=NetCoreWebDemo; Trusted_Connection=True; TrustServerCertificate=True;");
+			optionsBuilder.UseSqlServer(@" Server=.; Database=NetCoreWebDemo; 
+                 Trusted_Connection=True; TrustServerCertificate=True;");
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

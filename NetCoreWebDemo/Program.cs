@@ -1,3 +1,4 @@
+using DAL;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -11,7 +12,7 @@ builder.Services.AddControllersWithViews();
 //chgbt ye gore bu kod yazýldý ama kullandýgým zamanda cozum olmadý sýmdýlýk burada kalacak
 /*builder.Configuration.GetConnectionString("DefaultConnection")*/
 builder.Services.AddDbContext<DatabaseContext>();//admin tarafý ýcýn kullanýlýyor sistem hata verirse bunu geri koy options => options.UseSqlServer()
-builder.Services.AddDbContext<DatabaseContext>();//Dal katmaný icin context olustu
+builder.Services.AddDbContext<DataBaseContext>();//Dal katmaný icin context olustu katmanlý mimari icin olusturuldu
 
 var app = builder.Build();
 

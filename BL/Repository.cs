@@ -23,13 +23,12 @@ namespace BL
 			_objectSet.Add(entity);
 			return context.SaveChanges();
 		}
-
 		public T Find(int id)//gelen id ye gore bulup gosterecek metoddur
 		{
 			return _objectSet.Find(id);
 		}
 
-		public T Get()
+		public T Get()//deger atanmadı
 		{
 			throw new NotImplementedException();
 		}
