@@ -18,11 +18,13 @@ namespace BL
 				_objectSet = context.Set<T>();
 			}
 		}
+
 		public int Add(T entity)//ekleme metodudur
 		{
 			_objectSet.Add(entity);
 			return context.SaveChanges();
 		}
+
 		public T Find(int id)//gelen id ye gore bulup gosterecek metoddur
 		{
 			return _objectSet.Find(id);

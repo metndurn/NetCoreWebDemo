@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Entities;
 using NetCoreWebDemo.Data;
 using NetCoreWebDemo.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetCoreWebDemo.Areas.Admin.Controllers
 {
-	[Area("Admin")]
+	[Area("Admin"), Authorize]
     public class NewsController : Controller
     {
         private readonly DatabaseContext _context;

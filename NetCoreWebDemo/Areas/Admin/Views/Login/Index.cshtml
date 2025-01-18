@@ -1,4 +1,4 @@
-﻿
+﻿@model Entities.User
 @{
     Layout = null;
 }
@@ -42,22 +42,23 @@
                                     <p class="mb-0">Email Ve Şifre İle Oturum Açınız!</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form">
+                                    <form role="form" asp-action="Index">
                                         <label>Email</label>
                                         <div class="mb-3">
                                             <input type="email" name="email" id="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                                         </div>
                                         <label>Password</label>
                                         <div class="mb-3">
-                                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
                                         </div>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div>
                                         <div class="text-center">
-                                            <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Giriş</button>
+                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Giriş</button>
                                         </div>
+                                        <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="@TempData["ReturnUrl"]" />
                                     </form>
                                 </div>
                             </div>
@@ -73,5 +74,11 @@
             </div>
         </section>
     </main>
+    @{
+        if (TempData["Mesaj"] != null)
+        {
+            @TempData["Mesaj"]
+        }
+    }
 </body>
 </html>

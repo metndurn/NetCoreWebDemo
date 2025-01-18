@@ -21,23 +21,23 @@ namespace NetCoreWebDemo.Data
 			//base.OnConfiguring(optionsBuilder); /*MultipleActiveResultSets=true*/ 
 			optionsBuilder.UseSqlServer(@" Server=.; Database=NetCoreWebDemo; Trusted_Connection=True; TrustServerCertificate=True;");
 		}
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<User>().HasData(
-				new User
-				{
-					Id = 1,
-					Name = "Admin",
-					SurName = "1234567890",
-					Password = "12345",
-					UserName = "Admin",
-					Email = "admin@NetCoreWebDemo.net",
-					Phone ="1234567890",
-					IsActive = true,
-					CreateDate = DateTime.Now
-				}
-			);
-			base.OnModelCreating(modelBuilder);	
-		}
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+		//	modelBuilder.Entity<User>().HasData(
+		//		new User
+		//		{
+		//			Id = 1,
+		//			Name = "Admin",
+		//			SurName = "1234567890",
+		//			Password = "12345",
+		//			UserName = "Admin",
+		//			Email = "admin@NetCoreWebDemo.net",
+		//			Phone ="1234567890",
+		//			IsActive = true,
+		//			CreateDate = DateTime.Now
+		//		}
+		//	);
+		//	base.OnModelCreating(modelBuilder);	
+		//}
 	}
 }

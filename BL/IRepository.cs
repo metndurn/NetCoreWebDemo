@@ -1,12 +1,13 @@
-﻿using System.Linq.Expressions;
+﻿using Entities;
+using System.Linq.Expressions;
 
 namespace BL
 {
-	public interface IRepository<T> where T : class/*sart kosarak class oldugunu belirttik*/
+	interface IRepository<T> where T : class/*sart kosarak class oldugunu belirttik*/
 	{
 		List<T> GetAll();
 		List<T> GetAll(Expression<Func<T, bool>> expression);
-		T Get();
+		//T Get();
 		T Get(Expression<Func<T, bool>> expression);//bir veya birden fazla linqu sorgusu yapabiliriz
 		T Find(int id);
 		int Add(T entity);
